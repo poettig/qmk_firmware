@@ -16,10 +16,16 @@
 
 #pragma once
 
+#define TAPPING_TERM 100
+
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX, UNICODE_MODE_WINCOMPOSE
-
 #define MK_VARIANT MK_TYPE_KINETIC
+#define AUDIO_CLICKY
 
+//#define DEV_MODE
+
+#ifndef DEV_MODE
 #define NO_DEBUG
 #define NO_PRINT
-#define AUDIO_CLICKY
+#endif
+
