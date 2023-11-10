@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_preonic_grid(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______,
         _______, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,  ___X___, KC_DEL,
-        _______, ___X___, KC_MINS, ___X___, ___X___, ___X___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_BSPC, KC_PSCR,
+        _______, ___X___, KC_MINS, KC_EQL,  ___X___, ___X___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_BSPC, KC_PSCR,
         _______, ___X___, ___X___, ___X___, ___X___, ___X___, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   ___X___, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD,  KC_VOLU, KC_MPLY
     ),
