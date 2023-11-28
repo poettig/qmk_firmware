@@ -37,7 +37,7 @@ const uint32_t PROGMEM unicode_map[] = {
     [FQ_RIGHT] = 0x00AB, // «
 };
 
-enum preonic_layers { _BASE, _LOWER, _RAISE, _ADJUST, _LAYER3 };
+enum preonic_layers { _BASE, _LOWER, _RAISE, _ADJUST, _LAYER3, _FN };
 
 enum preonic_keycodes { LOWER, RAISE, EEGG };
 
@@ -58,7 +58,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,              KC_Q,    KC_W,    KC_E,    KC_R,  KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC,
         LT(_LAYER3, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,  KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,
         KC_LSFT,             KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
-        KC_LCTL,             ___X___, KC_LGUI, KC_LALT, LOWER, KC_SPC, KC_ENT, RAISE, KC_LEFT,  KC_DOWN, KC_UP,   KC_RGHT
+        KC_LCTL,             TT(_FN), KC_LGUI, KC_LALT, LOWER, KC_SPC, KC_ENT, RAISE, KC_LEFT,  KC_DOWN, KC_UP,   KC_RGHT
+    ),
+
+    [_FN] = LAYOUT_preonic_grid(
+        _______, LCTL(LALT(KC_1)), LCTL(LALT(KC_2)), LCTL(LALT(KC_3)), LCTL(LALT(KC_4)), LCTL(LALT(KC_5)), _______, _______, _______, _______,  _______, _______,
+        _______, KC_F13,  KC_F14,  KC_F15,  KC_F16,  _______, _______, _______, _______, _______,  _______, _______,
+        _______, KC_F17,  KC_F18,  KC_F19,  KC_F20,  _______, _______, _______, _______, _______,  _______, _______,
+        _______, KC_F21,  KC_F22,  KC_F23,  KC_F24,  _______, _______, _______, _______, _______,  _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______
     ),
 
     [_LAYER3] = LAYOUT_preonic_grid(
