@@ -62,8 +62,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_LAYER3] = LAYOUT_preonic_grid(
-        KC_GRV,  UM(FQ_LEFT),   UM(FQ_RIGHT),   ___X___,       ___X___,       ___X___,       ___X___,       ___X___,    ___X___,       ___X___,       ___X___,       ___X___,
-        _______, UM(ELLIPSIS),  LSFT(KC_SLASH), RALT(KC_8),    RALT(KC_9),    KC_GRAVE,      LSFT(KC_1),    KC_NUBS,    LSFT(KC_NUBS), LSFT(KC_0),    LSFT(KC_6),    ___X___,
+        KC_GRV,  UM(FQ_LEFT),   UM(FQ_RIGHT),   _______,       _______,       _______,       _______,       _______,    _______,       _______,       _______,       _______,
+        _______, UM(ELLIPSIS),  LSFT(KC_SLASH), RALT(KC_8),    RALT(KC_9),    KC_GRAVE,      LSFT(KC_1),    KC_NUBS,    LSFT(KC_NUBS), LSFT(KC_0),    LSFT(KC_6),    _______,
         _______, RALT(KC_MINS), LSFT(KC_7),     RALT(KC_7),    RALT(KC_0),    LSFT(KC_RBRC), LSFT(KC_MINS), LSFT(KC_8), LSFT(KC_9),    KC_SLSH,       LSFT(KC_DOT),  RALT(KC_Q),
         _______, KC_NUHS,       LSFT(KC_4),     RALT(KC_NUBS), RALT(KC_RBRC), LSFT(KC_EQL),  KC_RBRC,       LSFT(KC_5), LSFT(KC_2),    LSFT(KC_NUHS), LSFT(KC_COMM), KC_RSFT,
         _______, _______,       _______,        _______,       _______,       _______,       _______,       _______,    _______,       _______,       _______,       _______
