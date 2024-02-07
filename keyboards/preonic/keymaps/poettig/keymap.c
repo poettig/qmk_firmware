@@ -39,7 +39,7 @@ const uint32_t PROGMEM unicode_map[] = {
 
 enum preonic_layers { _BASE, _LOWER, _RAISE, _ADJUST, _LAYER3, _FN };
 
-enum preonic_keycodes { LOWER, RAISE, EEGG };
+enum preonic_keycodes { LOWER = SAFE_RANGE, RAISE, EEGG, SS_PING };
 
 #ifdef DEV_MODE
 static uint32_t key_hold_timer = 0;
@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, QK_BOOT, DB_TOGG, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, KC_DEL,
         _______, ___X___, ___X___, ___X___, ___X___, AU_TOGG, MU_TOGG, EEGG,    ___X___, ___X___, ___X___, ___X___,
-        _______, ___X___, ___X___, ___X___, ___X___, CK_TOGG, CK_UP,   CK_DOWN, CK_RST,  ___X___, ___X___, _______,
+        _______, SS_PING, ___X___, ___X___, ___X___, CK_TOGG, CK_UP,   CK_DOWN, CK_RST,  ___X___, ___X___, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     )
 
@@ -137,6 +137,17 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    #ifdef DEV_MODE
+        if (record->event.pressed) {
+            // Key is pressed, initialize the hold time counter
+            key_hold_timer = timer_read32();
+            uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+        } else {
+            // Key is released, calculate hold time
+            uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u, hold time: %lu\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count, timer_elapsed32(key_hold_timer));
+        }
+    #endif
+
     switch (keycode) {
         case LOWER:
             if (record->event.pressed) {
@@ -147,7 +158,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
             }
             return false;
-            break;
         case RAISE:
             if (record->event.pressed) {
                 layer_on(_RAISE);
@@ -157,27 +167,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
             }
             return false;
-            break;
         case EEGG:
             if (record->event.pressed) {
                 PLAY_SONG(easteregg);
             }
             return false;
-            break;
+        case SS_PING:
+            if (record->event.pressed) {
+                SEND_STRING("ping -6 2a00:1398:9:ff0e::1" SS_TAP(X_ENTER));
+            }
+            return false;
         default:
-            break;
+            return true; // Process other keycodes normally
     }
-
-#ifdef DEV_MODE
-    if (record->event.pressed) {
-        // Key is pressed, initialize the hold time counter
-        key_hold_timer = timer_read32();
-        uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
-    } else {
-        // Key is released, calculate hold time
-        uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u, hold time: %lu\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count, timer_elapsed32(key_hold_timer));
-    }
-#endif
-
-    return true;
 };
