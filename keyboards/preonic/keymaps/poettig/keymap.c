@@ -48,8 +48,11 @@ static uint32_t key_hold_timer = 0;
 const key_override_t shift_1_override = ko_make_basic(MOD_MASK_SHIFT, KC_1, LSFT(KC_GRV));
 const key_override_t shift_2_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, LSFT(KC_3));
 const key_override_t shift_7_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, RALT(KC_E));
-
-const key_override_t **key_overrides = (const key_override_t *[]){&shift_1_override, &shift_2_override, &shift_7_override, NULL};
+const key_override_t *key_overrides[] = {
+    &shift_1_override,
+    &shift_2_override,
+    &shift_7_override,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
