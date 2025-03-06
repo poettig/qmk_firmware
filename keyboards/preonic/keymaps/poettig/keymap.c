@@ -39,7 +39,7 @@ const uint32_t PROGMEM unicode_map[] = {
 
 enum preonic_layers { _BASE, _LOWER, _RAISE, _ADJUST, _LAYER3, _FN };
 
-enum preonic_keycodes { LOWER = SAFE_RANGE, RAISE, EEGG, SS_PING };
+enum preonic_keycodes { LOWER = SAFE_RANGE, RAISE, EEGG, SENDSTRING   };
 
 #ifdef DEV_MODE
 static uint32_t key_hold_timer = 0;
@@ -97,11 +97,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_ADJUST] = LAYOUT_preonic_grid(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, QK_BOOT, DB_TOGG, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, KC_DEL,
-        _______, ___X___, ___X___, ___X___, ___X___, AU_TOGG, MU_TOGG, EEGG,    ___X___, ___X___, ___X___, ___X___,
-        _______, SS_PING, ___X___, ___X___, ___X___, CK_TOGG, CK_UP,   CK_DOWN, CK_RST,  ___X___, ___X___, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, QK_BOOT,    DB_TOGG, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, KC_DEL,
+        _______, ___X___,    ___X___, ___X___, ___X___, AU_TOGG, MU_TOGG, EEGG,    ___X___, ___X___, ___X___, ___X___,
+        _______, SENDSTRING, ___X___, ___X___, ___X___, CK_TOGG, CK_UP,   CK_DOWN, CK_RST,  ___X___, ___X___, _______,
+        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     )
 
 };
@@ -175,9 +175,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 PLAY_SONG(easteregg);
             }
             return false;
-        case SS_PING:
+        case SENDSTRING:
             if (record->event.pressed) {
-                SEND_STRING("ping -6 2a00:1398:9:ff0e::1" SS_TAP(X_ENTER));
+                SEND_STRING("<replace-this-before-flashing>");
+//                SEND_STRING("<replace-this-before-flashing>" SS_TAP(X_ENTER));
             }
             return false;
         default:
